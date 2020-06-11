@@ -10,12 +10,35 @@
 
 <script>
 
+  // grab the canvas and context from the canvas
   const canvas = document.querySelector('#draw')
   const ctx = canvas.getContext('2d')
 
   // resize the canvas width and height
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
+
+  ctx.strokeStyle = '#BADA55'
+  ctx.lineJoin = 'round'
+  ctx.lineCap = 'round'
+  ctx.lineWidth = 100
+
+  let isDrawing = false
+  // variables for when we start and end drawing a line
+  let lastX = 0
+  let LastY = 0
+
+  // this func will be called every time we move our mouse on the canvas
+  function draw(e) {
+    if(!isDrawing) return   // stop the fn from running when we're not moused dowm
+    console.log(e)
+  }
+  // add an event listener to the whole canvas
+  canvas.addEventListener('mousemove', draw)
+  // add this listeners to trigger draing only on a mousedown
+  canvas.addEventListener('mousedown', () => isDrawing = true)
+  canvas.addEventListener('mouseup', () => isDrawing = false)
+  canvas.addEventListener('mouseout', () => isDrawing = false)
 
 </script>
 
@@ -24,6 +47,7 @@
 <style>
   html, body {
     margin: 0;
+    padding: 0;
   }
 </style>
 
